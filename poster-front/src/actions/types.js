@@ -1,3 +1,5 @@
+export const CERRAR_SESION = 'CERRAR_SESION'
+
 //Layout
 export const MOSTRAR_MENSAJE = 'MOSTRAR_MENSAJE'
 export const LIMPIAR_MENSAJE = 'LIMPIAR_MENSAJE'

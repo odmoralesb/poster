@@ -1,6 +1,5 @@
-import { API_URL } from '.'
-
-import { createAxiosInstance } from '../utils/helpers'
+//import { API_URL } from '.'
+//import { createAxiosInstance } from '../utils/helpers'
 
 import * as types from './types'
 
@@ -12,7 +11,7 @@ export function updateInputs(path, value) {
 			type: types.MODIFICAR_INPUTS, 
 			payload: { 
 				path, 
-				value: (value == '') ? null : value 
+				value: (value === '') ? null : value 
 			} 
 		})
 	}

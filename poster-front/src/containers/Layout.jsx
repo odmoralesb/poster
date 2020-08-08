@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+//import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
 
-
+import { signOut } from '../actions/autorizacion'
 
 import { 
     limpiarMensaje
@@ -15,8 +15,19 @@ import {
 class Layout extends Component {
 
 
+    UNSAFE_componentWillMount() {
+        if (!this.props.autenticacion) {
+            this.props.signOut()
+        } else {
+            // if (!this.props.user) {
+            //     this.props.getUserConfig()
+            // }
+        }
+    }
 
-    componentDidUpdate() {
+
+
+    UNSAFE_componentDidUpdate() {
         this.props.limpiarMensaje()
     }
 
@@ -58,12 +69,14 @@ class Layout extends Component {
 function mapStateToProps(state) {
     return {
         mensaje: state.layout.get('mensaje'),
+        autenticacion: state.autorizacion.get('autenticacion'),
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         limpiarMensaje: () => dispatch(limpiarMensaje()),
+        signOut: () => dispatch(signOut()),
     }
 }
 
