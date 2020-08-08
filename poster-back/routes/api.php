@@ -25,6 +25,8 @@ Route::get('/test', function() {
 
 Route::group(['prefix' => 'usuarios'], function() { 
 
-    Route::post('/crear', 'usuariosController@crear');  
+    Route::post('/crear', 'usuariosController@crear'); 
 
+    Route::post('/login', 'usuariosController@login');  
+    
 });

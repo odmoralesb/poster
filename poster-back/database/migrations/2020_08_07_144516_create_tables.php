@@ -15,17 +15,17 @@ class CreateTables extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombres');
-            $table->string('apellidos');
-            $table->string('email')->unique();
-            $table->string('usuario')->unique();
-            $table->string('password');
+            $table->string('nombres', 40);
+            $table->string('apellidos', 60);
+            $table->string('email', 40)->unique();
+            $table->string('alias', 20)->unique();
+            $table->string('password', 60);
             $table->timestamps();
         });
 
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
+            $table->string('titulo', 60);
             $table->string('texto');
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')            
