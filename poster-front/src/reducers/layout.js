@@ -15,7 +15,6 @@ export default function (state = INITIAL_STATE, action) {
             state = state.set('mensaje', Immutable.fromJS(action.payload))
             return state
 
-
         case types.LIMPIAR_MENSAJE:
             state = state.set('mensaje', null)
             return state

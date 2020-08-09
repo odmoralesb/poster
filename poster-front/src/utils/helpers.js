@@ -1,11 +1,9 @@
 import axios from 'axios'
-
-
 import { API_URL } from '../actions/index'
 
 
 
-export function createAxiosInstance(config) {
+export function createAxiosInstance(config={}) {
 
     let minConfig = {
         baseURL: API_URL

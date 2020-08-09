@@ -30,6 +30,10 @@ class Usuario extends Model
 		'password'
     ];
 
+    protected $hidden = [
+		'password'
+	];
+
 
     //Para un atributo personalizado: get<Nombre atributo en CamelCase>Attribute, Ejem: getEdadAttribute()
 	public function getFullnameAttribute()

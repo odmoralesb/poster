@@ -33,7 +33,7 @@ export default function (ComposedComponent) {
 
     function mapStateToProps(state) {
         return {
-            //user: state.common.get('user'),
+            user: state.autorizacion.get('usuario'),
         }
     }
 

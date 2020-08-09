@@ -58,7 +58,7 @@ class usuariosController extends Controller
 
                 return response()->json([
                     'message' => 'Usuario no encontrado'
-                ], 422); 
+                ], 401); 
 
             }
 
