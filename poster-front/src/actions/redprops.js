@@ -25,7 +25,7 @@ export function mostrarTipo() {
         const tipo = getState().redprops.get('tipo')
 
         
-        mostrarMensaje(dispatch, {tipo: 'info', descripcion: 'El tipo es ' + tipo})
+        mostrarMensaje(dispatch, {tipo: 'info', info: 'El tipo es ' + tipo})
 
         
 		

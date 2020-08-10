@@ -32,5 +32,9 @@ Route::group(['prefix' => 'usuarios'], function() {
     Route::post('/crear', 'usuariosController@crear'); 
 
     Route::post('/login', 'usuariosController@login');  
+
+    //Route::get('/sesion', 'usuariosController@usuario_sesion'); 
+
+    //Route::get('/logout', 'usuariosController@logout');  
     
 });

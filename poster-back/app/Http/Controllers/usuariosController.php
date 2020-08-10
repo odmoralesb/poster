@@ -49,6 +49,10 @@ class usuariosController extends Controller
 
             if (!is_null($usuario)) {
 
+                // session_start(['name' => 'laravel_session']);
+                // $_SESSION['autenticacion'] = true;
+                // $_SESSION['alias'] = $credenciales['alias'];
+
                 return response()->json([
                     'message' => 'Usuario encontrado',
                     'usuario' => Usuario::find($usuario->id)
@@ -66,10 +70,77 @@ class usuariosController extends Controller
 
         } catch (\Exception $e) {
             return response()->json(['ExceptionMessage' => $e->getMessage()], 500);
-        }
-        
+        }       
         
     }
+
+
+    // function usuario_sesion(Request $request) {
+    //     try {
+
+    //         session_start(['name' => 'laravel_session']);
+    //         $alias = isset($_SESSION['alias']) ? $_SESSION['alias'] : null;
+    //         $autenticacion = isset($_SESSION['autenticacion']) ? $_SESSION['autenticacion'] : false;
+
+
+    //         if ($alias && $autenticacion) {
+
+    //             $usuario = Usuario::where('alias', $alias)->first();
+
+    //             if (!is_null($usuario)) {
+
+    //                 return response()->json([
+    //                     'message' => 'Usuario encontrado',
+    //                     'usuario' => Usuario::find($usuario->id)
+    //                 ], 200);
+
+    //             } else {
+
+    //                 return response()->json([
+    //                     'message' => 'Usuario no encontrado'
+    //                 ], 401); 
+
+    //             }
+
+    //         } else {
+
+    //             return response()->json([
+    //                 'message' => 'Sesion no iniciada'
+    //             ], 422); 
+
+    //         }
+
+    //         //return response()->json($request->all(), 200);
+
+    //     } catch (\Exception $e) {
+    //         return response()->json(['ExceptionMessage' => $e->getMessage()], 500);
+    //     }       
+        
+    // }
+
+
+
+
+    // function logout() {
+    //     try {
+
+    //         session_start(['name' => 'laravel_session']);
+    //         session_destroy();
+
+    //         return response()->json([
+    //             'message' => 'Ok'
+    //         ], 200); 
+
+    //         //return response()->json($request->all(), 200);
+
+    //     } catch (\Exception $e) {
+    //         return response()->json(['ExceptionMessage' => $e->getMessage()], 500);
+    //     }       
+        
+    // }
+
+
+
 
 
 

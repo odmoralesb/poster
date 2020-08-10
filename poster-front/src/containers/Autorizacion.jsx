@@ -2,44 +2,59 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 
-import { signOut } from '../actions/autorizacion'
+
+import { signOut, sesion } from '../actions/autorizacion'
+
+
 
 
 export default function (ComposedComponent) {
     class Autorizacion extends Component {
 
 
+        // UNSAFE_componentWillMount() {
+        //     if (!this.props.usuario) {
+        //         this.props.signOut()
+        //     } 
+        // }
+
+        // UNSAFE_componentWillUpdate(nextProps) {
+        //     if (!nextProps.usuario) {
+        //         this.props.signOut()
+        //     }
+        // }
+
         UNSAFE_componentWillMount() {
-            const url = this.props.match.path
-            console.log(url)
-            if (!this.props.user) {
+            //this.props.sesion()
+            console.log("# usuario: ", this.props.usuario)
+            if (!this.props.usuario) {
                 this.props.signOut()
             } 
         }
 
         UNSAFE_componentWillUpdate(nextProps) {
-            const url = this.props.match.path
-            console.log(url)
-            if (!nextProps.user) {
+            console.log("# usuario: ", this.props.usuario)
+            if (!nextProps.usuario) {
                 this.props.signOut()
             }
         }
 
-        render() {
 
+        render() {
             return <ComposedComponent {...this.props} />
         }
     }
 
     function mapStateToProps(state) {
         return {
-            user: state.autorizacion.get('usuario'),
+            usuario: state.autorizacion.get('usuario'),
         }
     }
 
     const mapDispatchToProps = (dispatch) => {
         return {
             signOut: () => dispatch(signOut()),
+            sesion: () => dispatch(sesion()),
         }
     }
 

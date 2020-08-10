@@ -18,7 +18,7 @@ class Layout extends Component {
     UNSAFE_componentWillMount() {
         if (!this.props.autenticacion) {
             this.props.signOut()
-        }
+        } 
     }
 
 
@@ -31,7 +31,7 @@ class Layout extends Component {
 
 	render() {
 
-        const { mensaje, usuario } = this.props
+        const { mensaje } = this.props
 
         if (mensaje) {
 
@@ -66,7 +66,6 @@ function mapStateToProps(state) {
     return {
         mensaje: state.layout.get('mensaje'),
         autenticacion: state.autorizacion.get('autenticacion'),
-        usuario: state.autorizacion.get('usuario'),
     }
 }
 

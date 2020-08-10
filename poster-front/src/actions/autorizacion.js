@@ -6,6 +6,13 @@ import history from '../utils/history'
 
 import { mostrarMensaje } from './layout'
 
+
+export function modificarInputs(attr, value) {
+    return (dispatch) => {
+        dispatch({ type: types.MODIFICAR_INPUTS_CREDENCIALES, payload: { attr, value } })
+    }
+}
+
 export function signIn(credenciales) {
 
     const axios = createAxiosInstance()
@@ -29,6 +36,28 @@ export function signIn(credenciales) {
 }
 
 
+
+export function sesion() {
+    const axios = createAxiosInstance()
+    return function (dispatch) {
+        axios
+        .get(`${API_URL}/usuarios/sesion`)
+        .then((res) => { 
+            console.log("# res.data.usuario: ", res.data.usuario)   
+            dispatch({ type: types.INICIAR_SESION, payload: {usuario: res.data.usuario} })
+            history.push(window.FOLDER + '/')
+        })
+        .catch((err) => {
+            mostrarMensaje(dispatch, err)
+        })
+
+
+    }
+}
+
+
+
+
 export function signOut() {
     return function (dispatch) {
         dispatch({ type: types.CERRAR_SESION })
@@ -38,8 +67,3 @@ export function signOut() {
 
 
 
-export function modificarInputs(attr, value) {
-    return (dispatch) => {
-        dispatch({ type: types.MODIFICAR_INPUTS_CREDENCIALES, payload: { attr, value } })
-    }
-}
