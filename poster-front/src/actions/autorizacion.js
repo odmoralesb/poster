@@ -2,10 +2,11 @@ import { API_URL } from './index'
 import { createAxiosInstance } from '../utils/helpers'
 import * as types from './types'
 import history from '../utils/history'
-
+import Cookies from 'universal-cookie'
 
 import { mostrarMensaje } from './layout'
 
+const cookies = new Cookies()
 
 export function modificarInputs(attr, value) {
     return (dispatch) => {
@@ -18,11 +19,20 @@ export function signIn(credenciales) {
     const axios = createAxiosInstance()
 
     return function (dispatch) {
-
         axios
             .post(`${API_URL}/usuarios/login`, credenciales)
             .then((res) => {    
-                dispatch({ type: types.INICIAR_SESION, payload: {usuario: res.data.usuario} })
+                cookies.set('autenticacion', true, { path: '/' })
+                cookies.set('alias', res.data.usuario.alias, { path: '/' })
+                dispatch({ type: types.INICIAR_SESION })
+                //En la mejora, con JWT esto (sesion) se deberia quitar cuando se coloca el token en la cabecera de las peticiones
+                sesion().then(data => { 
+                    dispatch({ type: types.ASIGNAR_USUARIO_SESION, payload: data.usuario })
+                }).catch(err => {
+                    console.log(err)
+                    dispatch({ type: types.CERRAR_SESION })
+                    history.push(window.FOLDER + '/signin')
+                })
                 history.push(window.FOLDER + '/')
             })
             .catch((err) => {
@@ -35,28 +45,18 @@ export function signIn(credenciales) {
     }
 }
 
-
-
-export function sesion() {
+export function sesion(){
     const axios = createAxiosInstance()
-    return function (dispatch) {
-        axios
-        .get(`${API_URL}/usuarios/sesion`)
-        .then((res) => { 
-            console.log("# res.data.usuario: ", res.data.usuario)   
-            dispatch({ type: types.INICIAR_SESION, payload: {usuario: res.data.usuario} })
-            history.push(window.FOLDER + '/')
-        })
-        .catch((err) => {
-            mostrarMensaje(dispatch, err)
-        })
-
-
-    }
+    const alias = cookies.get('alias');
+    return axios.get(`${API_URL}/usuarios/sesion/${alias}`)
+    .then((res) => {
+        const data = res.data
+        return data
+    })
+    .catch((err) => {
+        throw err
+    })
 }
-
-
-
 
 export function signOut() {
     return function (dispatch) {

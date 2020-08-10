@@ -14,6 +14,8 @@ export default function (state = INITIAL_STATE, action) {
         
         case types.INICIAR_SESION:
             state = state.set('autenticacion', true)
+            return state
+        case types.ASIGNAR_USUARIO_SESION:
             state = state.set('usuario', Immutable.fromJS(action.payload.usuario))
             return state
         case types.CERRAR_SESION:

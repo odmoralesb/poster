@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 
 
-import { signOut, sesion } from '../actions/autorizacion'
+import { signOut } from '../actions/autorizacion'
 
 
 
@@ -12,29 +12,14 @@ export default function (ComposedComponent) {
     class Autorizacion extends Component {
 
 
-        // UNSAFE_componentWillMount() {
-        //     if (!this.props.usuario) {
-        //         this.props.signOut()
-        //     } 
-        // }
-
-        // UNSAFE_componentWillUpdate(nextProps) {
-        //     if (!nextProps.usuario) {
-        //         this.props.signOut()
-        //     }
-        // }
-
         UNSAFE_componentWillMount() {
-            //this.props.sesion()
-            console.log("# usuario: ", this.props.usuario)
-            if (!this.props.usuario) {
+            if (!this.props.autenticacion) {
                 this.props.signOut()
             } 
         }
 
         UNSAFE_componentWillUpdate(nextProps) {
-            console.log("# usuario: ", this.props.usuario)
-            if (!nextProps.usuario) {
+            if (!nextProps.autenticacion) {
                 this.props.signOut()
             }
         }
@@ -47,14 +32,13 @@ export default function (ComposedComponent) {
 
     function mapStateToProps(state) {
         return {
-            usuario: state.autorizacion.get('usuario'),
+            autenticacion: state.autorizacion.get('autenticacion'),
         }
     }
 
     const mapDispatchToProps = (dispatch) => {
         return {
             signOut: () => dispatch(signOut()),
-            sesion: () => dispatch(sesion()),
         }
     }
 

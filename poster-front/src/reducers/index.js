@@ -10,6 +10,9 @@ const appReducer = combineReducers({
 })
 
 const rootReducer = (state, action) => {
+    if (action.type === 'CERRAR_SESION' || action.type === 'INICIAR_SESION') {
+        state = undefined
+    }
     return appReducer(state, action)
 }
 

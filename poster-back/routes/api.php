@@ -33,7 +33,7 @@ Route::group(['prefix' => 'usuarios'], function() {
 
     Route::post('/login', 'usuariosController@login');  
 
-    //Route::get('/sesion', 'usuariosController@usuario_sesion'); 
+    Route::get('/sesion/{alias}', 'usuariosController@usuario_sesion'); 
 
     //Route::get('/logout', 'usuariosController@logout');  
     
