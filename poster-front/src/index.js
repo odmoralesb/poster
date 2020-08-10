@@ -45,8 +45,9 @@ if (autenticacion) {
     })
 }
 
-
 window.root = window.document.getElementById('root')
+
+window.store = store;
 
 ReactDOM.render(
     <Provider store={store}>

@@ -10,6 +10,12 @@ import {
 
 
 
+import {
+    limpiarMensaje
+} from '../actions/layout'
+
+
+
 
 import {
     modificarInputs,
@@ -20,6 +26,10 @@ import {
 
 
 class SignIn extends Component {
+
+    componentDidUpdate() {
+        this.props.limpiarMensaje()
+    }
 
 
 	render() {
@@ -55,18 +65,23 @@ class SignIn extends Component {
 
                         <Card>
                             <Card.Body>
-                                <form onSubmit={ e => { e.preventDefault(); this.props.signIn({ alias: this.props.alias, password: this.props.password }) }}>
-                                    <div className="form-group">
-                                        <label htmlFor="alias">Alias</label>
-                                        <input className="form-control" id="alias" aria-describedby="aliasHelp" value={ alias || '' } onChange={ e => this.props.modificarInputs('alias', e.target.value) } />
-                                        <small id="aliasHelp" className="form-text text-muted">Ingresa tu usuario de sesion</small>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="password">Password</label>
-                                        <input type="password" className="form-control" id="password"  value={ password || '' } onChange={ e => this.props.modificarInputs('password', e.target.value) }  />
-                                    </div>
-                                    <button type="submit" className="btn btn-primary">Ingresar</button>
-                                </form> 
+                                <div className="container-form-login">
+                                    <form onSubmit={ e => { e.preventDefault(); this.props.signIn({ alias: this.props.alias, password: this.props.password }) }}>
+                                        <div className="form-group">
+                                            <label htmlFor="alias">Alias</label>
+                                            <input className="form-control" id="alias" aria-describedby="aliasHelp" value={ alias || '' } onChange={ e => this.props.modificarInputs('alias', e.target.value) } />
+                                            <small id="aliasHelp" className="form-text text-muted">Ingresa tu usuario de sesion</small>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="password">Password</label>
+                                            <input type="password" className="form-control" id="password"  value={ password || '' } onChange={ e => this.props.modificarInputs('password', e.target.value) }  />
+                                        </div>
+                                        <div className="form-group">
+                                            <a href="/registro">Registro</a>
+                                        </div>
+                                        <button type="submit" className="btn btn-primary">Ingresar</button>
+                                    </form>
+                                </div>
                             </Card.Body>
                         </Card>
 
@@ -90,7 +105,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         signIn: (credentials) => dispatch(signIn(credentials)),
-        modificarInputs: (attr, value) => dispatch(modificarInputs(attr, value)),        
+        modificarInputs: (attr, value) => dispatch(modificarInputs(attr, value)),  
+        limpiarMensaje: () => dispatch(limpiarMensaje()),         
     }
 }
 

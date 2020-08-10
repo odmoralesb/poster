@@ -17,3 +17,8 @@ export function createAxiosInstance(config={}) {
 
     return axios.create(minConfig)
 }
+
+
+export function isPrimitive(test) {
+    return (test !== Object(test))
+}

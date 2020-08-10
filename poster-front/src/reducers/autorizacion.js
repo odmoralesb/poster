@@ -6,7 +6,6 @@ const INITIAL_STATE = Immutable.fromJS({
     password: null,
     autenticacion: false,
     usuario: null
-
 })
 
 export default function (state = INITIAL_STATE, action) {

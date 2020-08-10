@@ -15,22 +15,25 @@ export function mostrarMensaje(dispatch, msg) {
             case 401:
                 dispatch({ type: types.MOSTRAR_MENSAJE, payload: { tipo: 'danger', descripcion: 'No está autorizado para proceder con esta solicitud. Por favor, inicie sesión y vuelva a intentarlo' } })
                 break;
-            case 422:            
-                if (msg.response.data) {
+            case 422: 
+                if (msg.response.data.message) {
                     dispatch({ type: types.MOSTRAR_MENSAJE, payload: { tipo: 'warning', descripcion: msg.response.data.message }})
                 }
-                break;
-
-            case 405:
-                if (msg.response.data.Message) {
-                    dispatch({type: types.MOSTRAR_MENSAJE, payload: { tipo: 'danger', descripcion: msg.response.data.Message }})
+                if (msg.response.data.errors) {
+                    const errors = Object.values(msg.response.data.errors).map(e => e[0])
+                    errors.forEach(e => {
+                        dispatch({ type: types.MOSTRAR_MENSAJE, payload: { tipo: 'warning', descripcion: e }})                        
+                    });
                 }
                 break;
-
+            case 405:
+                if (msg.response.data.message) {
+                    dispatch({type: types.MOSTRAR_MENSAJE, payload: { tipo: 'danger', descripcion: msg.response.data.message }})
+                }
+                break;
             case 403:
                 dispatch({type: types.MOSTRAR_MENSAJE, payload: { tipo: 'danger', descripcion: 'Acceso Denegado' }})
                 break;
-
             default:
 
         }
