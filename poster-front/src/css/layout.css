@@ -1,20 +1,30 @@
-.titulo {
-    background-color: darkblue;
-    font-size: 14px;
-    padding: 15px;
-    color: white;
+.head {
+  background-color: darkblue;
+  font-size: 14px;
+  padding: 15px;
+  color: white;
+  height: 50px;
+}
+
+.navegacion {
+  border: 1px solid darkblue;
+  padding: 15px 10px 0px 10px;
+}
+
+.navegacion > .menu li {
+  display: inline;
+  margin-right: 20px;
 }
 
 .contenido {
-    padding: 10px;
-    font-size: 14px;
+  padding: 10px;
+  font-size: 14px;
 }
 
-
 .sep {
-    margin-top: 10px
+  margin-top: 10px;
 }
 
 button.font-btn {
-    font-size: 12px;
+  font-size: 12px;
 }
